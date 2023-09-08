@@ -65,7 +65,19 @@ export default defineConfig({
 							{
 								label: "Links",
 								name: "links",
-								widget: "list",
+								widget: "object",
+								fields: [
+									{
+										label: "Source",
+										name: "src",
+										widget: "string",
+									},
+									{
+										label: "Icon",
+										name: "icon",
+										widget: "string",
+									},
+								],
 							},
 							{
 								label: "Publish Date",
