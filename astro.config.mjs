@@ -6,7 +6,7 @@ import alpinejs from "@astrojs/alpinejs";
 
 // https://astro.build/config
 export default defineConfig({
-	site: "https://epicfolio.zank.studio",
+	site: "https://flexfolio.zank.studio",
 	vite: {
 		define: {
 			__DATE__: `'${new Date().toISOString()}'`,
@@ -19,9 +19,9 @@ export default defineConfig({
 			config: {
 				backend: {
 					name: "github",
-					repo: "warpsi/astros",
+					repo: "zankhq/flexfolio",
 					branch: "main",
-					base_url: "https://astros-7h0.pages.dev",
+					base_url: "https://flexfolio.zank.studio",
 					auth_endpoint: "/api/auth",
 				},
 				media_folder: "public/images",

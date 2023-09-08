@@ -1,6 +1,6 @@
-# Epicfolio
+# Flexfolio
 
-Epicfolio is template made with tailwind and alpine.
+Flexfolio is template made with tailwind and alpine.
 
 ### [🧑‍🚀 Astro website →](https://astro.build/)
 

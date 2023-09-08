@@ -19,7 +19,7 @@ const resolvedImageWithDomain = new URL("/meta/opengraph.png", Astro.site).toStr
 
 const { title, bodyClass } = Astro.props;
 
-const makeTitle = title ? title + " | " + "Epicfolio" : "Epicfolio template with Tailwind CSS and alpine js";
+const makeTitle = title ? title + " | " + "Flexfolio" : "Flexfolio template with Tailwind CSS and alpine js";
 ---
 
 <!doctype html>
@@ -36,13 +36,13 @@ const makeTitle = title ? title + " | " + "Epicfolio" : "Epicfolio template with
 
 		<SEO
 			title={makeTitle}
-			description="Epicfolio template with TailwindCSS and alpine js."
+			description="Flexfolio template with TailwindCSS and alpine js."
 			canonical={canonicalURL}
 			openGraph={{
 				basic: {
 					url: canonicalURL,
 					type: "website",
-					title: `Epicfolio Template`,
+					title: `Flexfolio Template`,
 					image: resolvedImageWithDomain,
 				},
 				image: {

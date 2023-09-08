@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: http://epicfolio.zank.studio/sitemap-index.xml
+Sitemap: http://flexfolio.zank.studio/sitemap-index.xml
