@@ -1,0 +1,32 @@
+---
+import { Icon } from "astro-icon";
+import site from "../data/site.json";
+---
+
+<nav class="z-10 w-full pt-6 px-6 absolute top-0 flex justify-between items-start md:items-center">
+	<div id="logo" :class="(portfolioOpen || aboutOpen) ? 'popup-open' : ''">
+		<a data-cursor-hover data-hover-title class="block" href="/">
+			<img class="w-10" src="/logo.svg" alt="Logo" />
+		</a>
+	</div>
+	<div id="social" x-show="!portfolioOpen && !aboutOpen">
+		<div class="flex flex-col md:flex-row gap-6">
+			{
+				site.socials.map((social) => (
+					<a data-cursor-hover data-hover-title href={social.link} target="_blank" rel="noopener noreferrer">
+						<Icon class="w-4 h-4" name={social.icon} />
+					</a>
+				))
+			}
+		</div>
+	</div>
+</nav>
+
+<style>
+	nav {
+		mix-blend-mode: difference;
+	}
+	#logo.popup-open {
+		pointer-events: none;
+	}
+</style>

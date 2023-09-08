@@ -1,0 +1,84 @@
+---
+import { SEO } from "astro-seo";
+import Top from "@components/About.astro";
+// import { pwaInfo } from "virtual:pwa-info";
+import "@fontsource-variable/inter";
+import { ViewTransitions } from "astro:transitions";
+import CustomCursor from "@components/CustomCursor.astro";
+import Bottom from "@components/Portfolio.astro";
+import Navbar from "@components/Navbar.astro";
+
+export interface Props {
+	title?: string;
+	bodyClass?: string;
+}
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
+
+const resolvedImageWithDomain = new URL("/meta/opengraph.png", Astro.site).toString();
+
+const { title, bodyClass } = Astro.props;
+
+const makeTitle = title ? title + " | " + "Epicfolio" : "Epicfolio template with Tailwind CSS and alpine js";
+---
+
+<!doctype html>
+<html lang="en">
+	<head transition:persist>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="theme-color" content="#ffffff" />
+
+		<!-- Global CSS -->
+		<link rel="stylesheet" href="/index.css" />
+
+		<SEO
+			title={makeTitle}
+			description="Epicfolio template with TailwindCSS and alpine js."
+			canonical={canonicalURL}
+			openGraph={{
+				basic: {
+					url: canonicalURL,
+					type: "website",
+					title: `Epicfolio Template`,
+					image: resolvedImageWithDomain,
+				},
+				image: {
+					alt: "Astro Homepage Screenshot",
+				},
+			}}
+		/>
+
+		<ViewTransitions />
+
+		<!-- {pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} />} -->
+		<!-- <script src="/src/pwa.ts"></script> -->
+	</head>
+	<body x-data="{ portfolioOpen: false, aboutOpen: false  }" class:list={["bg-primary-500 text-gray-50 h-screen", bodyClass]}>
+		<Navbar />
+		<Top />
+		<CustomCursor />
+		<!-- <Loader /> -->
+
+		<main transition:animate="initial">
+			<slot />
+		</main>
+
+		<Bottom />
+		<style is:global>
+			/* Improve Page speed */
+			/* https://css-tricks.com/almanac/properties/c/content-visibility/ */
+			img {
+				content-visibility: auto;
+			}
+
+			body {
+				/* Decomment if you want to use the loader */
+				/* visibility: hidden; */
+				/* overflow-x: hidden */
+			}
+		</style>
+	</body>
+</html>

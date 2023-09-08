@@ -1,0 +1,5 @@
+---
+const { title } = Astro.props;
+---
+
+<span class="cursor-target-text" transition:name={`title-${title}`} transition:animate="initial">{title}</span>

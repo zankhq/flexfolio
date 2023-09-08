@@ -1,0 +1,154 @@
+---
+// https://codepen.io/Sidechain_Studio/pen/VxdgMX?editors=1010
+---
+
+<div class="content w-full">
+	<canvas class="scene scene--full" id="scene"></canvas>
+	<div class="content__inner">
+		<img class="lg:max-w-lg opacity-70" src="/images/hero-text.png" alt="Disappear Here" />
+	</div>
+</div>
+
+<script is:inline src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/708453/perlin.js"></script>
+
+<script>
+	import * as THREE from "three";
+	import { gsap, Power1 } from "gsap";
+
+	document.addEventListener("astro:page-load", () => {
+		var canvas = document.querySelector("#scene");
+
+		var width = canvas.offsetWidth,
+			height = canvas.offsetHeight;
+
+		var renderer = new THREE.WebGLRenderer({
+			canvas: canvas,
+			antialias: true,
+		});
+
+		renderer.setPixelRatio(window.devicePixelRatio > 1 ? 2 : 1);
+		renderer.setSize(width, height);
+		renderer.setClearColor(0x161925);
+
+		var scene = new THREE.Scene();
+
+		var camera = new THREE.PerspectiveCamera(100, width / height, 0.1, 10000);
+		camera.position.set(60, 0, 220);
+
+		var light = new THREE.HemisphereLight(0xffffff, 0x0c056d, 0.6);
+		scene.add(light);
+
+		var light = new THREE.DirectionalLight(0x590d82, 0.5);
+		light.position.set(200, 300, 400);
+		scene.add(light);
+		var light2 = light.clone();
+		light2.position.set(-200, 300, 400);
+		scene.add(light2);
+
+		var geometry = new THREE.IcosahedronGeometry(120, 20);
+		var positions = geometry.attributes.position.array;
+		var originalPositions = [];
+
+		for (var i = 0; i < positions.length; i += 3) {
+			var vertex = new THREE.Vector3(positions[i], positions[i + 1], positions[i + 2]);
+			originalPositions.push(vertex.clone());
+		}
+
+		var material = new THREE.MeshPhongMaterial({
+			emissive: 0x00f5d4,
+			emissiveIntensity: 0.9,
+			shininess: 0,
+		});
+		var shape = new THREE.Mesh(geometry, material);
+		scene.add(shape);
+
+		function updateVertices(a) {
+			for (var i = 0, j = 0; i < positions.length; i += 3, j++) {
+				var vector = originalPositions[j].clone();
+				var perlin = noise.simplex3(vector.x * 0.006 + a * 0.0004, vector.y * 0.006 + a * 0.0004, vector.z * 0.006);
+				var ratio = perlin * 0.4 * (mouse.y + 0.1) + 0.8;
+				vector.multiplyScalar(ratio);
+
+				positions[i] = vector.x;
+				positions[i + 1] = vector.y;
+				positions[i + 2] = vector.z;
+			}
+			geometry.attributes.position.needsUpdate = true;
+		}
+
+		function render(a) {
+			requestAnimationFrame(render);
+			updateVertices(a);
+			renderer.render(scene, camera);
+		}
+
+		function onResize() {
+			canvas.style.width = "";
+			canvas.style.height = "";
+			width = canvas.offsetWidth;
+			height = canvas.offsetHeight;
+			camera.aspect = width / height;
+			camera.updateProjectionMatrix();
+			renderer.setSize(width, height);
+		}
+
+		var mouse = new THREE.Vector2(0.8, 0.5);
+		function onMouseMove(e) {
+			gsap.to(mouse, {
+				y: e.clientY / height,
+				x: e.clientX / width,
+				ease: Power1.easeOut,
+				duration: 0.8,
+			});
+		}
+
+		requestAnimationFrame(render);
+		window.addEventListener("mousemove", onMouseMove);
+		var resizeTm;
+		window.addEventListener("resize", function () {
+			resizeTm = clearTimeout(resizeTm);
+			resizeTm = setTimeout(onResize, 200);
+		});
+	});
+</script>
+
+<style>
+	/* Base */
+
+	.content {
+		position: relative;
+		display: grid;
+		justify-content: center;
+		align-items: center;
+		align-content: center;
+		margin: 0 auto;
+		min-height: 100vh;
+	}
+
+	/* Canvas positions */
+	.content__inner {
+		grid-area: 1 / 1 / 1 / 1;
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		align-content: center;
+	}
+
+	.scene {
+		position: absolute;
+	}
+
+	.scene--full {
+		width: 100%;
+		height: 100vh;
+	}
+
+	@media screen and (max-width: 55em) {
+		.content {
+			flex-direction: column;
+			height: auto;
+		}
+	}
+</style>

@@ -1,0 +1,26 @@
+---
+import Layout from "@layouts/Layout.astro";
+import Blob from "@components/Blob.astro";
+---
+
+<!-- Original: https://codepen.io/supah/ -->
+<style>
+	.center {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		width: 100%;
+	}
+</style>
+<Layout bodyClass="overflow-hidden">
+	<div class="center">
+		<Blob />
+	</div>
+</Layout>
+
+<script></script>

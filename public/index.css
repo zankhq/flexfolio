@@ -1,0 +1,79 @@
+.heading-wrapper {
+	display: flex;
+	align-items: baseline;
+	gap: 6px;
+}
+@media (min-width: 50em) {
+	.heading-wrapper {
+		flex-direction: row-reverse;
+		justify-content: flex-end;
+		margin-inline-start: calc(-1 * 25px);
+	}
+	.heading-wrapper .anchor-link {
+		visibility: hidden;
+	}
+	.heading-wrapper:hover .anchor-link {
+		visibility: visible;
+	}
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar-track {
+	border: none;
+	background-color: #ddfffa;
+}
+
+::-webkit-scrollbar {
+	width: 8px;
+	background-color: #ddfffa;
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: #161925;
+	border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+	background-color: #333a56;
+}
+.dark {
+	::-webkit-scrollbar-track {
+		border: none;
+		background-color: rgb(12 10 9);
+	}
+	::-webkit-scrollbar {
+		width: 10px;
+		background-color: rgb(12 10 9);
+	}
+	::-webkit-scrollbar-thumb {
+		background-color: white;
+	}
+}
+
+::-moz-selection {
+	color: white;
+	background: black;
+}
+::selection {
+	color: white;
+	background: black;
+}
+.dark ::-moz-selection {
+	color: black;
+	background: white;
+}
+.dark ::selection {
+	color: black;
+	background: white;
+}
+
+/* Other classes */
+
+.select-none {
+	-webkit-tap-highlight-color: transparent;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}

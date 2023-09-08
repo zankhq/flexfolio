@@ -1,0 +1,88 @@
+---
+import { Icon } from "astro-icon";
+import Container from "./Container.astro";
+import { getCollection } from "astro:content";
+
+const portfolioEntries = await getCollection("portfolio");
+---
+
+<div @keydown.escape="portfolioOpen=false" class="portfolio w-full fixed z-20" transition:animate="initial">
+	<div class="flex justify-center px-10 pt-50 py-4 w-full items-center">
+		<template x-teleport="body">
+			<div
+				x-show="portfolioOpen"
+				x-transition:enter="transition ease-out duration-300"
+				x-transition:enter-start="translate-y-full"
+				x-transition:enter-end="-translate-y-0"
+				x-transition:leave="transition ease-in duration-300"
+				x-transition:leave-start="translate-y-0"
+				x-transition:leave-end="translate-y-full"
+				class="flex flex-col fixed inset-0 w-screen pt-32 pb-40 bg-secondary-50 overflow-auto">
+				<section class="pt-8">
+					<Container>
+						<h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">My recent work</h2>
+						<p class="mt-2 text-lg leading-8 text-gray-600">Learn how to grow your business with our expert advice.</p>
+						<div class="flex flex-col mt-16 lg:mt-20 gap-36">
+							{
+								portfolioEntries.map((entry) => (
+									<article class="relative isolate flex flex-col gap-16 lg:flex-row lg:odd:flex-row-reverse">
+										<div class="relative aspect-video lg:w-96 lg:shrink-0">
+											<img
+												src="https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3603&q=80"
+												alt=""
+												class="absolute inset-0 h-full w-full rounded-md bg-gray-50 object-cover"
+											/>
+										</div>
+										<div class="flex flex-col justify-center">
+											<div class="flex items-center gap-x-4 text-xs">
+												<time datetime="2020-03-16" class="text-gray-500">
+													{entry.data.publishDate.toLocaleDateString("en-US", { year: "numeric" })}
+												</time>
+											</div>
+											<div class="group relative max-w-xl">
+												<h3 class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
+													<a href="#">{entry.data.title}</a>
+												</h3>
+												<p class="mt-5 pb-6 text-sm leading-6 text-gray-600">{entry.data.snippet}</p>
+												<div class="flex gap-4 text-gray-900">
+													{entry.data.links.map((link) => (
+														<a
+															data-cursor-hover
+															data-hover-title
+															href={link.src}
+															target="_blank"
+															rel="noopener noreferrer">
+															<Icon class="w-6 h-6" name={link.icon} />
+														</a>
+													))}
+												</div>
+											</div>
+										</div>
+									</article>
+								))
+							}
+						</div>
+					</Container>
+				</section>
+			</div>
+		</template>
+
+		<div
+			x-show="!aboutOpen"
+			@click="portfolioOpen = !portfolioOpen"
+			class="p-4 select-none cursor-pointer cursor-target text-center"
+			data-cursor-hover
+			data-cursor-parallax>
+			<span class="cursor-target-text block break-keep" data-cursor-parallax-elelement x-text="portfolioOpen ? 'Close' : 'Portfolio'"></span>
+		</div>
+	</div>
+</div>
+<!--END Header -->
+
+<style>
+	.portfolio {
+		mix-blend-mode: difference;
+		position: fixed;
+		bottom: 0;
+	}
+</style>

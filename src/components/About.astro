@@ -1,0 +1,144 @@
+---
+import Container from "./Container.astro";
+import { Icon } from "astro-icon";
+import site from "../data/site.json";
+
+let educations = [
+	{
+		title: "Freelance Graphic Designer",
+		school: "Uni",
+		date: "2014-present",
+		description:
+			"Since 2014, I've been on an incredible freelance journey as a graphic designer. It's a path filled with\
+			diverse projects and inspiring collaborations. From branding to web design, I've tackled it all,\
+			consistently exceeding client expectations. This journey has honed not only my design skills but also my\
+			ability tocommunicate effectively and manage projects. As I continue to evolve, I look forward to taking\
+			on new creative challenges and making a lasting impact through design.",
+	},
+	{
+		title: "Freelance Graphic Designer",
+		school: "Uni",
+		date: "2014-present",
+		description:
+			"Since 2014, I've been on an incredible freelance journey as a graphic designer. It's a path filled with diverse projects and inspiring collaborations. From branding to web design, I've tackled it all, consistently exceeding client expectations. This journey has honed not only my design skills but also my ability tocommunicate effectively and manage projects. As I continue to evolve, I look forward to taking on new creative challenges and making a lasting impact through design.",
+	},
+];
+
+let experience = [
+	{
+		title: "Freelance Graphic Designer",
+		company: "Google",
+		date: "2014-present",
+		description:
+			"Since 2014, I've been on an incredible freelance journey as a graphic designer. It's a path filled with diverse projects and inspiring collaborations. From branding to web design, I've tackled it all, consistently exceeding client expectations. This journey has honed not only my design skills but also my ability tocommunicate effectively and manage projects. As I continue to evolve, I look forward to taking on new creative challenges and making a lasting impact through design.",
+	},
+	{
+		title: "Freelance Graphic Designer",
+		company: "Google",
+		date: "2014-present",
+		description:
+			"Since 2014, I've been on an incredible freelance journey as a graphic designer. It's a path filled with diverse projects and inspiring collaborations. From branding to web design, I've tackled it all, consistently exceeding client expectations. This journey has honed not only my design skills but also my ability tocommunicate effectively and manage projects. As I continue to evolve, I look forward to taking on new creative challenges and making a lasting impact through design.",
+	},
+];
+---
+
+<div @keydown.escape="aboutOpen=false" class="about fixed left-1/2 -translate-x-1/2 z-20" transition:animate="initial">
+	<div class="flex items-center justify-center px-10 py-4 w-full">
+		<!-- Left Content -->
+
+		<template x-teleport="body">
+			<div
+				x-show="aboutOpen"
+				x-transition:enter="transition ease-out duration-300"
+				x-transition:enter-start="-translate-y-full"
+				x-transition:enter-end="translate-y-0"
+				x-transition:leave="transition ease-in duration-300"
+				x-transition:leave-start="translate-y-0"
+				x-transition:leave-end="-translate-y-full"
+				class="flex flex-col gap-32 pt-32 pb-40 fixed inset-0 min-h-screen bg-secondary-50 text-gray-900 overflow-auto">
+				<section class="pt-8">
+					<Container>
+						<div class="flex flex-col self-stretch justify-center">
+							<h2 class="text-3xl font-bold pb-8">Pita Adis</h2>
+							<p>
+								Greetings! I am Pita Adis, a passionate graphic designer based in the beautiful city of Sarajevo, Bosnia and
+								Herzegovina. My creative journey started back in 2012 when I was just a kid, and it has been an exciting adventure
+								ever since. What began as a fun thing to do evolved into a full-blown career. <br />
+								<br />Designing isn't just a job for me; it's a lifelong passion. Design is my playground, my canvas, and my way of
+								bringing imagination to life. Over the years, I've honed my skills to not only create stunning visuals but also make
+								them come alive through the magic of After Effects, Premiere Pro. The world of design is constantly evolving, and I'm
+								committed to staying on the cutting edge. In my quest for creativity. <br />
+								<br />I'm always eager to push the boundaries of what's possible. I believe that every project is a chance to tell a
+								unique story, and I'd love to collaborate with you to bring your vision to life. Whether it's graphic design, motion
+								graphics, or 3D art, I'm here to transform ideas into captivating visuals. So, if you're ready to embark on a creative
+								journey together, let's connect. Feel free to explore my portfolio to see some of my past work, and don't hesitate to
+								reach out—I'm always up for a new challenge!
+							</p>
+							<div class="flex pt-8 gap-8">
+								{
+									site.socials.map((social) => (
+										<a data-cursor-hover data-hover-title href={social.link} target="_blank" rel="noopener noreferrer">
+											<Icon class="w-6 h-6" name={social.icon} />
+										</a>
+									))
+								}
+							</div>
+						</div>
+					</Container>
+				</section>
+
+				<section class="section2">
+					<Container class="flex flex-col md:flex-row gap-16 justify-between">
+						<div class="flex flex-col gap-16">
+							<h2 class="font-bold">Experience</h2>
+							{
+								experience.map((e) => (
+									<div>
+										<h3 class="text-xl font-semibold">{e.title}</h3>
+										<h5 class="font-semibold">{e.company}</h5>
+										<h4 class="font-normal">{e.date}</h4>
+										<p class="pt-4">{e.description}</p>
+									</div>
+								))
+							}
+						</div>
+						<div class="flex flex-col gap-16">
+							<h2 class="font-bold">Educations</h2>
+							{
+								educations.map((e) => (
+									<div>
+										<h3 class="text-xl font-semibold">{e.title}</h3>
+										<h5 class="font-semibold">{e.school}</h5>
+										<h4 class="font-normal">{e.date}</h4>
+										<p class="pt-4">{e.description}</p>
+									</div>
+								))
+							}
+						</div>
+					</Container>
+				</section>
+			</div>
+		</template>
+
+		<div
+			x-show="!portfolioOpen"
+			@click="aboutOpen = !aboutOpen"
+			class="p-4 select-none text-center cursor-pointer cursor-target"
+			data-cursor-hover
+			data-cursor-parallax>
+			<span
+				class="cursor-target-text block break-keep whitespace-nowrap"
+				data-cursor-parallax-elelement
+				x-text="aboutOpen ? 'Close' : 'About Me'">
+			</span>
+		</div>
+	</div>
+</div>
+
+<style>
+	.about {
+		mix-blend-mode: difference;
+		position: fixed;
+		top: 0;
+	}
+</style>
