@@ -1,7 +1,7 @@
 ---
 import { SEO } from "astro-seo";
 import Top from "@components/About.astro";
-// import { pwaInfo } from "virtual:pwa-info";
+import { pwaInfo } from "virtual:pwa-info";
 import "@fontsource-variable/inter";
 import { ViewTransitions } from "astro:transitions";
 import CustomCursor from "@components/CustomCursor.astro";
@@ -53,8 +53,8 @@ const makeTitle = title ? title + " | " + "Flexfolio" : "Flexfolio template with
 
 		<ViewTransitions />
 
-		<!-- {pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} />} -->
-		<!-- <script src="/src/pwa.ts"></script> -->
+		{pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} />}
+		<script src="/src/pwa.ts"></script>
 	</head>
 	<body x-data="{ portfolioOpen: false, aboutOpen: false  }" class:list={["bg-primary-500 text-gray-50 h-screen", bodyClass]}>
 		<Navbar />

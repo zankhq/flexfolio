@@ -5,7 +5,12 @@ import site from "../data/site.json";
 
 <nav class="z-10 w-full pt-6 px-6 absolute top-0 flex justify-between items-start md:items-center">
 	<div id="logo" :class="(portfolioOpen || aboutOpen) ? 'popup-open' : ''">
-		<a data-cursor-hover data-hover-title class="block" href="/">
+		<a
+			data-cursor-hover
+			data-hover-title
+			class="block"
+			href="/"
+			@click="if (portfolioOpen) { portfolioOpen = false } else if (aboutOpen) { aboutOpen = false }">
 			<img class="w-10" src="/logo.svg" alt="Logo" />
 		</a>
 	</div>
@@ -25,8 +30,5 @@ import site from "../data/site.json";
 <style>
 	nav {
 		mix-blend-mode: difference;
-	}
-	#logo.popup-open {
-		pointer-events: none;
 	}
 </style>
