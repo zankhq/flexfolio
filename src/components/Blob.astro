@@ -44,7 +44,7 @@
 
 		var renderer = new THREE.WebGLRenderer({
 			canvas: canvas,
-			antialias: true,
+			antialias: false,
 		});
 
 		renderer.setPixelRatio(window.devicePixelRatio > 1 ? 2 : 1);
@@ -53,7 +53,7 @@
 
 		var scene = new THREE.Scene();
 
-		var camera = new THREE.PerspectiveCamera(100, width / height, 0.1, 10000);
+		var camera = new THREE.PerspectiveCamera(100, width / height, 0.1, 1000);
 		camera.position.set(60, 0, 220);
 
 		function createLight(color, intensity, x, y, z) {
@@ -85,10 +85,9 @@
 			originalPositions.push(vertex.clone());
 		}
 
-		var material = new THREE.MeshPhongMaterial({
+		var material = new THREE.MeshLambertMaterial({
 			emissive: 0x00f5d4,
 			emissiveIntensity: 0.9,
-			shininess: 0,
 		});
 		var shape = new THREE.Mesh(geometry, material);
 		scene.add(shape);
