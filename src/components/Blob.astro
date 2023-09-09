@@ -15,6 +15,27 @@
 	import * as THREE from "three";
 	import { gsap, Power1 } from "gsap";
 
+	// Throttle function
+	function throttle(func, limit) {
+		let inThrottle;
+		return function () {
+			if (!inThrottle) {
+				func.apply(this, arguments);
+				inThrottle = true;
+				setTimeout(() => (inThrottle = false), limit);
+			}
+		};
+	}
+
+	// Debounce function
+	function debounce(func, wait) {
+		let timeout;
+		return function (...args) {
+			clearTimeout(timeout);
+			timeout = setTimeout(() => func.apply(this, args), wait);
+		};
+	}
+
 	document.addEventListener("astro:page-load", () => {
 		var canvas = document.querySelector("#scene");
 
@@ -34,6 +55,16 @@
 
 		var camera = new THREE.PerspectiveCamera(100, width / height, 0.1, 10000);
 		camera.position.set(60, 0, 220);
+
+		function createLight(color, intensity, x, y, z) {
+			const light = new THREE.DirectionalLight(color, intensity);
+			light.position.set(x, y, z);
+			scene.add(light);
+		}
+
+		createLight(0xffffff, 0.6, 0, 1, 0); // Hemisphere light
+		createLight(0x590d82, 0.5, 200, 300, 400);
+		createLight(0x590d82, 0.5, -200, 300, 400);
 
 		var light = new THREE.HemisphereLight(0xffffff, 0x0c056d, 0.6);
 		scene.add(light);
@@ -93,22 +124,21 @@
 		}
 
 		var mouse = new THREE.Vector2(0.8, 0.5);
-		function onMouseMove(e) {
+
+		const onMouseMove = throttle(function (e) {
 			gsap.to(mouse, {
 				y: e.clientY / height,
 				x: e.clientX / width,
 				ease: Power1.easeOut,
 				duration: 0.8,
 			});
-		}
+		}, 200);
 
 		requestAnimationFrame(render);
 		window.addEventListener("mousemove", onMouseMove);
-		var resizeTm;
-		window.addEventListener("resize", function () {
-			resizeTm = clearTimeout(resizeTm);
-			resizeTm = setTimeout(onResize, 200);
-		});
+
+		const debouncedResize = debounce(onResize, 200);
+		window.addEventListener("resize", debouncedResize);
 	});
 </script>
 
