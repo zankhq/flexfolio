@@ -41,7 +41,7 @@ const portfolioEntries = await getCollection("portfolio");
 											</div>
 											<div class="group relative max-w-xl">
 												<h3 class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-													<a href="#">{entry.data.title}</a>
+													<span>{entry.data.title}</span>
 												</h3>
 												<p class="mt-5 pb-6 text-sm leading-6 text-gray-600">{entry.data.snippet}</p>
 												<div class="flex gap-4 text-gray-900">
@@ -49,6 +49,7 @@ const portfolioEntries = await getCollection("portfolio");
 														<a
 															data-cursor-hover
 															data-hover-title
+															aria-label="Social"
 															href={link.src}
 															target="_blank"
 															rel="noopener noreferrer">

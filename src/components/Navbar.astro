@@ -8,6 +8,7 @@ import site from "../data/site.json";
 		<a
 			data-cursor-hover
 			data-hover-title
+			aria-label="Home"
 			class="block"
 			href="/"
 			@click="if (portfolioOpen) { portfolioOpen = false } else if (aboutOpen) { aboutOpen = false }">
@@ -18,7 +19,7 @@ import site from "../data/site.json";
 		<div class="flex flex-col md:flex-row gap-6">
 			{
 				site.socials.map((social) => (
-					<a data-cursor-hover data-hover-title href={social.link} target="_blank" rel="noopener noreferrer">
+					<a data-cursor-hover data-hover-title aria-label="Social" href={social.link} target="_blank" rel="noopener noreferrer">
 						<Icon class="w-4 h-4" name={social.icon} />
 					</a>
 				))

@@ -77,7 +77,13 @@ let experience = [
 							<div class="flex pt-8 gap-8">
 								{
 									site.socials.map((social) => (
-										<a data-cursor-hover data-hover-title href={social.link} target="_blank" rel="noopener noreferrer">
+										<a
+											data-cursor-hover
+											data-hover-title
+											aria-label="Social"
+											href={social.link}
+											target="_blank"
+											rel="noopener noreferrer">
 											<Icon class="w-6 h-6" name={social.icon} />
 										</a>
 									))
