@@ -46,11 +46,12 @@
 		var renderer = new THREE.WebGLRenderer({
 			canvas: canvas,
 			antialias: false,
+			alpha: true,
 		});
 
 		renderer.setPixelRatio(window.devicePixelRatio > 1 ? 2 : 1);
 		renderer.setSize(width, height);
-		renderer.setClearColor(0x161925);
+		renderer.setClearColor(0x000000, 0);
 
 		var scene = new THREE.Scene();
 
@@ -87,8 +88,9 @@
 		}
 
 		var material = new THREE.MeshLambertMaterial({
-			emissive: 0x00f5d4,
-			emissiveIntensity: 0.9,
+			emissive: 0xca46cc,
+			opacity: 0.8,
+			emissiveIntensity: 0.6,
 		});
 		var shape = new THREE.Mesh(geometry, material);
 		scene.add(shape);
@@ -96,7 +98,7 @@
 		function updateVertices(a) {
 			for (var i = 0, j = 0; i < positions.length; i += 3, j++) {
 				var vector = originalPositions[j].clone();
-				var perlin = noise.simplex3(vector.x * 0.006 + a * 0.0004, vector.y * 0.006 + a * 0.0004, vector.z * 0.006);
+				var perlin = noise.simplex3(vector.x * 0.002 + a * 0.0004, vector.y * 0.006 + a * 0.0004, vector.z * 0.006);
 				var ratio = perlin * 0.4 * (mouse.y + 0.1) + 0.8;
 				vector.multiplyScalar(ratio);
 
@@ -130,7 +132,7 @@
 				y: e.clientY / height,
 				x: e.clientX / width,
 				ease: Power1.easeOut,
-				duration: 0.8,
+				duration: 1,
 			});
 		}, 200);
 
