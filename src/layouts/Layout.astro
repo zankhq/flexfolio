@@ -7,6 +7,7 @@ import { ViewTransitions } from "astro:transitions";
 import CustomCursor from "@components/CustomCursor.astro";
 import Bottom from "@components/Portfolio.astro";
 import Navbar from "@components/Navbar.astro";
+import BackgroundEffect from "@components/BackgroundEffect.astro";
 
 export interface Props {
 	title?: string;
@@ -56,11 +57,13 @@ const makeTitle = title ? title + " | " + "Flexfolio" : "Flexfolio template with
 		{pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} />}
 		<script src="/src/pwa.ts"></script>
 	</head>
-	<body x-data="{ portfolioOpen: false, aboutOpen: false  }" class:list={["bg-primary-500 text-gray-50 h-screen", bodyClass]}>
+	<body x-data="{ portfolioOpen: false, aboutOpen: false  }" class:list={["bg-white text-gray-50 h-screen", bodyClass]}>
 		<Navbar />
 		<Top />
 		<CustomCursor />
 		<!-- <Loader /> -->
+
+		<BackgroundEffect />
 
 		<main transition:animate="initial">
 			<slot />

@@ -3,22 +3,22 @@
 	"socials": [
 		{
 			"name": "Behance",
-			"link": "https://www.behance.net/pitaadis",
+			"link": "https://www.behance.net/",
 			"icon": "ri:behance-fill"
 		},
 		{
 			"name": "Instagram",
-			"link": "https://www.instagram.com/pitaadis/",
+			"link": "https://www.instagram.com/",
 			"icon": "ri:instagram-line"
 		},
 		{
 			"name": "Dribbble",
-			"link": "https://dribbble.com/pitaadis",
+			"link": "https://dribbble.com/",
 			"icon": "icon-park-outline:dribble"
 		},
 		{
 			"name": "LinkedIn",
-			"link": "https://www.linkedin.com/in/pitaadis/",
+			"link": "https://www.linkedin.com/",
 			"icon": "mdi:linkedin"
 		}
 	]
