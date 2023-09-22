@@ -1,11 +1,18 @@
 # Flexfolio
 
-Flexfolio is template made with tailwind and alpine.
+Flexfolio is portfolio template made with Astro, tailwind and alpinejs.
+
+[![Deploy to Cloudflare Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/zankhq/flexfolio)
+
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/zankhq/flexfolio)
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/zankhq/flexfolio)
+
+### [🧪 Site preview →](https://flexfolio.zank.studio)
 
 ### [🧑‍🚀 Astro website →](https://astro.build/)
 
 ### [🕮 Astro docs →](https://docs.astro.build/en/getting-started/)
-
 
 ## ✅ Features
 
