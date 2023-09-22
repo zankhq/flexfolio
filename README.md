@@ -2,6 +2,8 @@
 
 Flexfolio is portfolio template made with Astro, tailwind and alpinejs.
 
+Blob codepen: https://codepen.io/Sidechain_Studio/pen/VxdgMX
+
 [![Deploy to Cloudflare Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/zankhq/flexfolio)
 
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/zankhq/flexfolio)
