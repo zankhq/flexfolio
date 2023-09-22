@@ -21,15 +21,15 @@ const portfolioEntries = await getCollection("portfolio");
 				<section class="pt-8">
 					<Container>
 						<h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">My recent work</h2>
-						<p class="mt-2 text-lg leading-8 text-gray-600">Learn how to grow your business with our expert advice.</p>
-						<div class="flex flex-col mt-16 lg:mt-20 gap-36">
+						<p class="mt-2 text-lg leading-8 text-gray-600">Here you can see my latest projects</p>
+						<div class="flex flex-col mt-16 lg:mt-20 gap-44">
 							{
 								portfolioEntries.map((entry) => (
 									<article class="relative isolate flex flex-col gap-16 lg:flex-row lg:odd:flex-row-reverse">
-										<div class="relative aspect-video lg:w-96 lg:shrink-0">
+										<div class="relative aspect-video lg:w-[30rem] lg:shrink-0">
 											<img
-												src="https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3603&q=80"
-												alt=""
+												src={entry.data.image.src}
+												alt={entry.data.image.alt}
 												class="absolute inset-0 h-full w-full rounded-md bg-gray-50 object-cover"
 											/>
 										</div>
